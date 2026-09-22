@@ -6,7 +6,7 @@
 | Setup cannot find Valheim | Use `--game-dir '/path/to/Valheim'` with the official native Steam folder containing `valheim.app`. Multiple libraries require an explicit selection. |
 | `Unsupported game files` | This release pins Valheim 1.0.15 build 25390630. A different build requires review and adapter updates; do not bypass the hash check. |
 | `Quit Valheim before installing` | Close the game completely and rerun the loader or bridge step. Preparation/check steps do not write into the game. |
-| `BepInEx is already installed` | The assistant preserves existing loaders. Verify the compatible version and successful startup log, then use the bridge step. |
+| `BepInEx is already installed` | The installer preserves existing loaders. Verify the compatible version and successful startup log, then use the bridge step. |
 | Archive checksum or staging mismatch | Keep the rejected files for inspection outside `.tools/bepinex-staged`, remove the bad cached ZIP if indicated, then rerun preparation. Never disable verification. |
 | Long pauses despite fast OpenJev | Check image freshness, route confidence, heading changes and planner activity in the journals. Reduce game rendering load if image processing is delayed. |
 | `Bridge unreachable` | Valheim/plugin is not running. Memory tools still work. Use scripts/launch-game.command with Steam running; the normal Steam Play options were not changed. |

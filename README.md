@@ -14,35 +14,24 @@ actions. A live brain observer shows what each system is doing.
 
 [![Animated gameplay beside the live brain observer](docs/media/brain-showcase.gif)](docs/media/brain-showcase.mp4)
 
-[Watch the one-minute video](docs/media/brain-showcase.mp4).
+[Watch the one-minute video](docs/media/brain-showcase.mp4) · **Guided demonstration**.
 
-This is a **guided demonstration of real actions**, not autonomous performance.
 Move lights up from measured movement; Talk lights up after successful chat delivery.
 
 ## Install
 
-Supported target: **Apple Silicon Mac, official native Steam Valheim 1.0.15
-(build 25390630)**. The game plugin uses the x86_64 loader through Rosetta; local
-OpenJev uses native arm64 Python 3.12. Setup checks the game assembly hashes
-before installing the adapter.
+Requires an **Apple Silicon Mac** and the **official Steam version of Valheim 1.0.15**.
 
 1. Install Steam/Valheim, native Python 3.12, and Codex with access to `gpt-5.6-luna`.
 2. Download or clone this repository and keep it in a permanent folder.
 3. Double-click **[`setup.command`](setup.command)** and choose **Prepare dependencies and build**.
-4. Follow the **[installation and first-play tutorial](docs/TUTORIAL.md)** to verify
-   normal play, install the loader/bridge, and bind your character and world.
+4. Complete installation and character setup in **[Getting started](docs/TUTORIAL.md)**.
 
 Terminal equivalent, from the repository folder:
 
 ```sh
 ./setup.command prepare
 ```
-
-Preparation downloads the pinned model and loader, installs a local .NET SDK,
-builds against your game, and creates private settings. It does not launch Valheim
-or modify its files. The tutorial covers the separate installation steps.
-Run `./setup.command check` for a local installation checklist, or add `--dry-run`
-to preview a setup step. Existing settings and memories are preserved.
 
 ## Play and observe
 
@@ -63,38 +52,30 @@ To stop immediately, press **F8** in-game or run:
 ./scripts/stop.sh
 ```
 
-Runs last 1–1,800 seconds, defaulting to 600. The controller releases inputs on
-exit; a safety pause requires a new operator start. `--shadow --seconds 30`
-observes without sending controls or chat. The brain page is a live view, and
-private journals record each run.
-
-## What is available
+## Features
 
 | Component | Behavior |
 |---|---|
-| System 2 · Luna, low reasoning | Chooses bounded goals, plans, inventory/crafting sequences and in-character chat |
-| System 1 · local OpenJev 0.8B | Classifies the rendered view; local control logic steers, looks, interacts and stops |
-| Brain observer | Shows actual planner/control events, measured movement and sent speech |
-| Game bridge | Own-player status, camera, normal controls, inventory slots and known recipes; short input leases |
-| Memory and personality | World-scoped SQLite memory; editable character profile; curious, talkative default character |
+| Luna · System 2 | Chooses goals, plans actions and speaks in character |
+| OpenJev · System 1 | Reads the game view to guide movement and interactions |
+| Brain observer | Displays movement, speech and agent activity live |
+| Gameplay controls | Movement, interaction, combat, inventory and recipe selection |
+| Memory and personality | Separate memories for each world and an editable character profile |
 
 Inventory controls operate on the character's own grid and visible recipes.
 Combat is off on fresh installs. Remote player identities are unauthenticated,
-so privileged remote commands are blocked; use the local operator controls.
+so privileged remote commands are blocked; use the controls on your Mac.
 
-The bridge, memory, and observer stay on this Mac. Luna receives game images and
+The bridge, memory, and observer stay on your Mac. Luna receives game images and
 dialogue through your Codex account when autonomous play starts and uses that
 account's model allowance. OpenJev runs locally. Server passwords are entered only
 in Valheim; none are needed by the installer or stored in the repository.
 
 ## Documentation
 
-- [Tutorial: installation to first play](docs/TUTORIAL.md)
-- [Installation reference, paths and uninstall](docs/INSTALL.md)
+- [Getting started](docs/TUTORIAL.md)
 - [Troubleshooting](docs/TROUBLESHOOTING.md)
-- [Architecture: Luna, OpenJev and the observer](docs/ARCHITECTURE.md)
-- [Recording your own showcase](docs/RECORDING.md)
-- [Game adapter](docs/ADAPTER.md) and [sources and versions](docs/PROVENANCE.md)
+- [Architecture](docs/ARCHITECTURE.md)
 
 ## Star history
 
@@ -102,20 +83,8 @@ in Valheim; none are needed by the installer or stored in the repository.
 
 ## Research and rights notice
 
-This is an independent, unofficial research mod for studying AI agents and game
-interaction. It is not affiliated with, endorsed by, or supported by Iron Gate AB,
-Coffee Stain Publishing AB, Valve, or the providers of its AI models and tools.
-
-All rights in Valheim, its name, trademarks, game content and assets belong to
-Iron Gate AB, Coffee Stain Publishing AB and their respective licensors and
-rights holders. All such rights are reserved. Other names, trademarks, software
-and models belong to their respective owners. No ownership of those materials
-is claimed, including the game visuals in the demonstration video.
-
-Original project code is provided under the [MIT License](LICENSE); third-party
-components retain their own licenses. That license grants no rights to Valheim
-or other third-party content. Use requires a legitimately obtained copy of the
-game and compliance with the applicable [Valheim terms](https://www.valheimgame.com/eula/),
-[modding policy](https://www.valheimgame.com/news/regarding-mods/), platform terms,
-model licenses and server rules. Describing this project as research does not
-grant permission or an exemption from those terms.
+An independent, unofficial research mod, with no affiliation or endorsement by
+Valheim's creators. All rights in Valheim belong to Iron Gate AB, Coffee Stain
+Publishing AB and their respective rights holders. Original project code is
+[MIT licensed](LICENSE); third-party rights remain reserved. See the
+[full research and rights notice](NOTICE.md).

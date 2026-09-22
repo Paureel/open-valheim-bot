@@ -1,4 +1,4 @@
-# Installed-game adapter
+# Game adapter
 
 Implemented in `bridge/Plugin/GameAdapter.cs` against the official native Steam
 Valheim **1.0.15**, build **25390630**. The relevant game
@@ -40,6 +40,17 @@ assembly or decompiled game source is redistributed in Git.
 Game/Unity access is on the main thread. Captured chat is queued and drained by the
 plugin's Update before entering the core event ring; capture timestamps are kept.
 Dialogue from another world/character is not filed in the configured world's memory.
+
+## Request validation
+
+The JSON parser rejects duplicate keys, trailing data, excessive nesting, invalid
+numbers and unescaped controls. Expired queued requests cannot execute after a
+timeout, and the dispatcher does not reuse disposed wait handles.
+
+The bridge provides typed actions through normal gameplay APIs. It does not
+expose console/devcommands, arbitrary world cameras, omniscient nearby-entity
+state or a mock-game fallback. Screen capture uses the final player framebuffer
+with the game's post-processing and HUD.
 
 ## Input and observation safety
 
@@ -89,7 +100,7 @@ implemented.
 
 ## Sender identity limitation
 
-In this installed game, `UserInfo.UserId` is serialized in the sender's payload.
+In this game version, `UserInfo.UserId` is serialized in the sender's payload.
 `ZRoutedRpc.RPC_RoutedRPC` also accepts `m_senderPeerID` from the routed payload;
 its relay path does not bind that claimed original sender to the authenticated
 transport peer before forwarding. On a dedicated-server client, the authenticated
@@ -103,5 +114,5 @@ The core's verified-owner command logic is unreachable for unauthenticated remot
 chat in this adapter.
 
 A secure remote-owner/trusted-player channel requires additional authenticated
-identity evidence or an explicitly designed pairing mechanism. Local operator
-commands are authenticated by private loopback tokens.
+identity evidence or an explicitly designed pairing mechanism. Commands issued
+locally are authenticated by private loopback tokens.

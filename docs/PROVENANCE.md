@@ -11,17 +11,8 @@
 | Microsoft .NET SDK | 10.0.401, osx-arm64, installed locally under `.tools/dotnet`. Standard reference pack 2.1.0 from NuGet. |
 | Official Steam Valheim | Native macOS 1.0.15, Steam build 25390630. Game assembly hashes and API bindings are pinned in the plugin. |
 
-The JSON parser rejects duplicate keys, trailing data, excessive nesting, invalid
-numbers and unescaped controls. Expired queued requests cannot execute after a
-timeout, and the dispatcher does not reuse disposed wait handles.
-
-The bridge provides typed actions through normal gameplay APIs. It does not
-expose console/devcommands, arbitrary world cameras, omniscient nearby-entity
-state or a mock-game fallback. Screen capture uses the final player framebuffer
-with the game's post-processing and HUD.
-
 Game DLLs and local reference decompilations are excluded from Git. The code in
 `bridge/Plugin` is the project's adapter, not redistributed game source. Model
 weights and toolchains are downloaded during setup and retain their own licenses.
 The included gameplay video retains the rights of the game content's owners;
-see the [research and rights notice](../README.md#research-and-rights-notice).
+see the [research and rights notice](../NOTICE.md).

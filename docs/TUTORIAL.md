@@ -1,14 +1,7 @@
-# From download to your first autonomous session
+# Getting started
 
 This tutorial installs the research mod on an Apple Silicon Mac and shows how
 to start and observe a session.
-
-[![A real game frame beside the brain observer](media/brain-showcase.jpg)](media/brain-showcase.mp4)
-
-[Play the one-minute guided demonstration](media/brain-showcase.mp4). The character
-performs real movement and chat; the brain highlights match recorded events.
-The demonstration is directed. Your autonomous session uses Luna and OpenJev to
-choose what happens.
 
 ## 1. Get the prerequisites
 
@@ -16,8 +9,8 @@ You need the official native Steam Valheim installation, an Apple Silicon Mac,
 Rosetta for the x86_64 game loader, native Python 3.12, and a signed-in Codex runtime
 with access to `gpt-5.6-luna`.
 
-The reviewed game is **Valheim 1.0.15 / build 25390630**. Setup checks the actual
-assembly hashes. A newer/different build needs an adapter review before use.
+The supported game is **Valheim 1.0.15 / build 25390630**. Setup verifies the
+game files. A different build requires an updated adapter.
 
 For Python, use the [Python.org macOS installer](https://www.python.org/downloads/macos/)
 for Python 3.12, or, if you already use Homebrew:
@@ -82,7 +75,7 @@ Accept any required game agreement yourself. Enter server passwords in Valheim.
 
 This backs up existing destination files and installs the pinned BepInEx pack.
 It refuses to write while Valheim is running. If BepInEx is already installed,
-the assistant leaves it alone; see the [installation reference](INSTALL.md).
+the installer leaves it alone; see the [installation reference](INSTALL.md).
 
 Keep Steam running and signed in. Open **`scripts/launch-game.command`** in Finder.
 This is the modded launcher; the ordinary Steam Play button is not configured by
@@ -100,7 +93,7 @@ Choose setup step 3, or run:
 ./setup.command bridge --normal-play-verified
 ```
 
-This checks the BepInEx startup log, rebuilds against the reviewed assemblies,
+This checks the BepInEx startup log, rebuilds against the supported game files,
 and installs only the two bridge DLLs with a backup. Open the modded launcher
 again, select the intended character and join your world. Controls start paused.
 
@@ -165,7 +158,8 @@ browser, using another app, F8, or manual takeover pauses it. To take over, pres
 ./scripts/stop.sh
 ```
 
-The time limit also stops the run and releases controls. To resume after reviewing
+Sessions accept `--seconds` from 1 to 1,800, defaulting to 600 when omitted.
+The time limit stops the run and releases controls. To resume after reviewing
 a pause, explicitly start another session and refocus the game. It does not resume
 by itself. For a view-only check, use `./scripts/start.sh --shadow --seconds 30`;
 that keeps controls paused and sends no chat.
@@ -191,5 +185,6 @@ setup does not change them. The compact perception profile uses smaller images:
 VALHEIM_SYSTEM_ONE_IMAGE_PROFILE=compact ./scripts/start.sh --seconds 600
 ```
 
-See [troubleshooting](TROUBLESHOOTING.md) for setup and runtime issues, or use
+See the [installation reference](INSTALL.md) for paths, advanced setup and
+uninstallation, [troubleshooting](TROUBLESHOOTING.md) for common issues, or
 [the recording guide](RECORDING.md) to make your own side-by-side video.

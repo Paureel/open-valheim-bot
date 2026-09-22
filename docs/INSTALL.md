@@ -1,11 +1,11 @@
 # Installation reference
 
-Start with the [first-play tutorial](TUTORIAL.md). The setup assistant
+Start with [Getting started](TUTORIAL.md). The installer
 can be opened by double-clicking `setup.command`, or run from the repository root:
 
 | Command | What it does |
 |---|---|
-| `./setup.command prepare` | Detects Steam game files, verifies reviewed hashes, stages the pinned loader, installs the local SDK and OpenJev environment/model, builds the plugin, initializes private state |
+| `./setup.command prepare` | Detects Steam game files, verifies compatibility hashes, stages the pinned loader, installs the local SDK and OpenJev environment/model, builds the plugin, initializes private state |
 | `./setup.command loader` | Installs backed-up BepInEx files, after normal manual play and with Valheim closed |
 | `./setup.command bridge` | Rebuilds and installs the two bridge DLLs, after a successful BepInEx launch and with Valheim closed |
 | `./setup.command player` | Displays the loaded character/world and asks whether to bind that identity locally |
@@ -25,7 +25,7 @@ for noninteractive use. It does not bypass the running-game guard or assembly ch
 
 The game folder is saved in ignored `.tools/game-dir`; the build and launch scripts
 reuse it. `VALHEIM_GAME_DIR` or `--game-dir` overrides it. `VALHEIM_PYTHON` overrides
-the launcher interpreter. The setup assistant discovers native Steam libraries,
+the launcher interpreter. The installer discovers native Steam libraries,
 but asks for an explicit path when more than one installation exists. The folder
 must contain the official `valheim.app`, not a Windows/Whisky installation.
 
@@ -36,6 +36,10 @@ move the old `.tools/system-one` folder aside and rerun preparation with native
 Python 3.12 because Python virtual environments are not relocatable.
 
 ## Versions and downloads
+
+The game plugin uses the x86_64 BepInEx loader through Rosetta. OpenJev runs with
+native arm64 Python 3.12. Setup checks game assembly hashes before building the
+adapter and rejects unsupported files.
 
 | Dependency | Pinned/required value |
 |---|---|
@@ -56,7 +60,7 @@ adapter port. Re-inspect affected APIs and bindings after a game update.
 The installer preserves existing private configuration. Loader and bridge changes
 are backed up with manifests. It leaves Steam launch options unchanged, and does
 not change security settings, code signatures, or quarantine flags. A pre-existing
-BepInEx install is left in place by the assistant; verify its compatibility before
+BepInEx install is left in place by the installer; verify its compatibility before
 using the bridge step.
 
 ## Local state and privacy
@@ -82,15 +86,15 @@ Codex during autonomous play; OpenJev inference stays local.
 ## Optional Codex MCP integration
 
 Standalone gameplay does not need MCP registration. To expose the local service
-to your operator Codex environment, run after preparation:
+to your Codex environment, run after preparation:
 
 ```sh
 .tools/system-one/bin/python scripts/install-local.py
 ```
 
 This backs up the Codex configuration, registers only the `valheim-codex` entry,
-and refuses to replace an unrelated entry with that name. Reload the operator's
-MCP connections afterward. Existing unrelated entries are preserved. The gameplay
+and refuses to replace an unrelated entry with that name. Reload your MCP
+connections afterward. Existing unrelated entries are preserved. The gameplay
 planner itself has tool execution disabled.
 
 ## Uninstall or restore

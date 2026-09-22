@@ -3,7 +3,8 @@
 The player combines an asynchronous planner with a local visual controller.
 Luna chooses goals and dialogue; OpenJev classifies the current game image.
 Deterministic control code turns those classifications and intentions into normal
-game inputs through the bridge.
+game inputs through the bridge. See [sources and versions](PROVENANCE.md) for
+upstream projects and dependency revisions.
 
 ## System 2: Luna
 
@@ -72,7 +73,7 @@ target confidence and the normal crosshair caption. See the
 
 World-scoped SQLite memory, private settings and run journals live in
 `~/Library/Application Support/ValheimCodex/`. Private loopback tokens authenticate
-local operator commands. Remote chat does not grant privileged control.
+local control commands. Remote chat does not grant privileged control.
 
 ## Brain observer
 

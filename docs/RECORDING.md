@@ -1,12 +1,11 @@
 # Guided gameplay recording
 
-The [included showcase](media/brain-showcase.mp4) pairs directed gameplay with
-the brain observer and is labeled **Guided demonstration**. Move follows measured
-movement and Talk follows in-game chat delivery.
+Record a planned sequence of gameplay beside the brain observer. The output is
+labeled **Guided demonstration**.
 
-The recording helper requires an operator-reviewed route. Do not reuse a motion
+The recording helper follows a route you plan. Do not reuse a motion
 plan in an unseen location. It limits each movement segment to four seconds,
-renews only against fresh captured frames, stops on health loss or operator/game
+renews only against fresh captured frames, stops on health loss or a manual/game
 pause, and releases controls at the end. It uses normal movement, jumping,
 chat, and the character's own inventory. No spawning, teleporting or server changes.
 
@@ -24,7 +23,7 @@ Use an empty plan for a passive guided capture. The recording lasts 60 seconds.
 
 ```sh
 PYTHONPATH=src /usr/bin/python3 scripts/record-guided.py \
-  --plan /absolute/path/to/reviewed-plan.json --output recordings/take
+  --plan /absolute/path/to/plan.json --output recordings/take
 .tools/recording/bin/python scripts/render-recording.py recordings/take \
   --output recordings/brain-showcase.mp4
 ```
