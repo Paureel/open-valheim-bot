@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brain</title>
+  <link rel="stylesheet" href="/brain.css">
+  <script src="/brain.js" defer></script>
+</head>
+<body>
+<main>
+  <header><h1>brain</h1><div id="connection" role="status"><i></i><span>Connecting</span></div></header>
+  <section class="brain-stage" aria-label="Live activity of the two decision systems">
+    <div class="system-headings">
+      <div class="system-one"><span class="eyebrow">System 1</span><h2>OpenJev <small>0.8B</small></h2><p id="s1-status">Waiting</p></div>
+      <div class="system-two"><span class="eyebrow">System 2</span><h2>Luna</h2><p id="s2-status">Waiting</p></div>
+    </div>
+    <svg id="brain" viewBox="0 0 900 610" role="img" aria-labelledby="brain-title brain-desc">
+      <title id="brain-title">Live brain activity</title>
+      <desc id="brain-desc">OpenJev perception and local controls on the left. Luna planning, goals, crafting, inventory and conversation on the right. Only recorded activity lights a region.</desc>
+      <defs>
+        <path id="left-outline" d="M435 50 C412 20 354 26 316 53 C263 43 224 76 213 111 C169 118 140 156 145 193 C101 222 95 270 118 304 C86 347 108 393 136 417 C130 458 157 490 194 501 C204 540 241 552 278 543 C310 578 359 567 381 544 C414 538 436 509 437 473 L437 92 Q439 66 435 50Z"/>
+        <path id="right-outline" d="M465 50 C488 20 546 26 584 53 C637 43 676 76 687 111 C731 118 760 156 755 193 C799 222 805 270 782 304 C814 347 792 393 764 417 C770 458 743 490 706 501 C696 540 659 552 622 543 C590 578 541 567 519 544 C486 538 464 509 463 473 L463 92 Q461 66 465 50Z"/>
+        <clipPath id="left-clip"><use href="#left-outline"/></clipPath><clipPath id="right-clip"><use href="#right-outline"/></clipPath>
+        <radialGradient id="left-tint"><stop stop-color="#57d7cc" stop-opacity=".11"/><stop offset="1" stop-color="#57d7cc" stop-opacity=".025"/></radialGradient>
+        <radialGradient id="right-tint"><stop stop-color="#b39cf8" stop-opacity=".12"/><stop offset="1" stop-color="#b39cf8" stop-opacity=".025"/></radialGradient>
+      </defs>
+      <g class="hemisphere one"><use class="outline" href="#left-outline"/>
+        <g clip-path="url(#left-clip)">
+          <g class="region" data-region="see"><path d="M180 20H445V174C393 158 370 196 324 171S251 151 195 167Z"/><text x="330" y="112">See</text></g>
+          <g class="region" data-region="look"><path d="M100 152C189 185 235 128 284 171C305 195 293 231 257 246C217 270 166 243 106 270Z"/><text x="204" y="216">Look</text></g>
+          <g class="region" data-region="move"><path d="M284 171C346 207 388 151 445 174V311C383 340 348 288 301 310C258 311 241 276 257 246C293 231 305 195 284 171Z"/><text x="355" y="256">Move</text></g>
+          <g class="region" data-region="attack"><path d="M100 270C159 240 216 271 257 246C241 276 258 311 301 310C329 354 264 387 235 377C187 363 177 410 110 414Z"/><text x="199" y="327">Attack</text></g>
+          <g class="region" data-region="interact"><path d="M301 310C348 288 383 340 445 311V428C382 404 373 461 311 424C282 405 304 390 280 370C309 354 314 337 301 310Z"/><text x="360" y="376">Interact</text></g>
+          <g class="region" data-region="jump"><path d="M110 414C177 410 187 363 235 377C264 397 262 433 263 465L280 557H172Z"/><text x="205" y="455">Jump</text></g>
+          <g class="region" data-region="block"><path d="M235 377C255 389 268 380 280 370C304 390 282 405 311 424C352 444 354 471 350 506L325 576H280L263 465C262 433 264 397 235 377Z"/><text x="304" y="490">Block</text></g>
+          <g class="region" data-region="stop"><path d="M311 424C373 461 382 404 445 428V571H325L350 506C354 471 352 444 311 424Z"/><text x="392" y="485">Stop</text></g>
+        </g>
+        <g class="folds"><path d="M321 60C303 92 371 113 401 91M234 127C267 111 278 130 278 147M160 202C187 178 241 181 239 214M319 217C344 200 381 226 406 203M325 285C360 267 390 302 415 276M131 304C157 291 177 305 176 331M228 283C254 282 277 307 261 331M153 373C157 349 207 347 224 357M327 358C351 336 382 360 412 348M161 431C189 417 206 436 206 454M305 442C316 463 336 470 326 490M366 474C374 450 400 455 414 467M265 509C291 531 302 517 304 537"/></g>
+      </g>
+      <g class="hemisphere two"><use class="outline" href="#right-outline"/>
+        <g clip-path="url(#right-clip)">
+          <g class="region" data-region="plan"><path d="M455 20H720L705 167C649 151 622 191 576 171S507 158 455 174Z"/><text x="570" y="112">Plan</text></g>
+          <g class="region" data-region="explore"><path d="M455 174C507 158 543 204 593 180C616 202 605 247 576 263C540 271 488 253 455 278Z"/><text x="527" y="227">Explore</text></g>
+          <g class="region" data-region="gather"><path d="M593 180C628 163 649 151 705 167L800 152V289C744 266 712 299 671 284C640 275 603 290 576 263C605 247 616 202 593 180Z"/><text x="695" y="234">Gather</text></g>
+          <g class="region" data-region="craft"><path d="M455 278C488 253 540 271 576 263C603 290 605 320 590 342C561 370 504 335 455 368Z"/><text x="529" y="320">Craft</text></g>
+          <g class="region" data-region="inventory"><path d="M576 263C603 290 640 275 671 284C712 299 744 266 800 289V401C741 394 726 368 686 378C643 396 613 366 590 342C605 320 603 290 576 263Z"/><text x="702" y="338">Inventory</text></g>
+          <g class="region" data-region="combat"><path d="M455 368C504 335 561 370 590 342C613 366 613 410 594 437C551 417 510 461 455 439Z"/><text x="530" y="398">Combat</text></g>
+          <g class="region" data-region="rest"><path d="M590 342C613 366 643 396 686 378C726 368 741 394 800 401L718 509C686 481 633 488 594 437C613 410 613 366 590 342Z"/><text x="692" y="433">Rest</text></g>
+          <g class="region" data-region="talk"><path d="M455 439C510 461 551 417 594 437C633 488 686 481 718 509L690 580H455Z"/><text x="562" y="501">Talk</text></g>
+        </g>
+        <g class="folds"><path d="M579 60C597 92 529 113 499 91M666 127C633 111 622 130 622 147M740 202C713 178 673 181 675 211M485 200C516 193 528 213 550 205M535 248C557 241 577 228 575 209M625 250C650 274 676 252 699 263M750 297C728 309 744 332 766 339M485 296C510 278 549 301 562 285M485 342C510 319 541 343 560 332M629 316C649 308 670 329 677 353M611 383C637 409 668 393 689 407M488 389C509 377 533 396 559 385M701 467C683 444 650 463 637 442M504 491C516 472 538 476 550 485M582 524C610 503 631 531 645 508"/></g>
+      </g>
+      <path id="bridge-path" d="M425 296Q450 270 475 296"/>
+    </svg>
+    <div id="mobile-commands" aria-hidden="true"></div>
+    <div class="current" aria-live="polite"><p id="objective">Waiting for activity</p><p id="speech"></p></div>
+  </section>
+  <footer><span id="activity">No activity yet</span><span id="freshness"></span></footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,43 @@
+name: Update star tracker
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-stars.yml'
+      - 'scripts/update-stars.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: star-tracker
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Refresh aggregate star data and images
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/update-stars.py
+      - name: Commit changed assets
+        run: |
+          git add docs/media/star-history.json docs/media/star-history.svg docs/media/stars.svg
+          if git diff --cached --quiet; then
+            echo 'Star tracker is already current.'
+            exit 0
+          fi
+          git config user.name 'Valheim AI contributors'
+          git config user.email 'contributors@localhost'
+          git commit -m 'Update star tracker'
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,23 @@
+{
+  "world_id": "configure-your-world",
+  "character_name": "configure-your-character",
+  "service_port": 8732,
+  "bridge_port": 8731,
+  "decision_interval_seconds": 4,
+  "decision_timeout_seconds": 90,
+  "max_observation_age_seconds": 30,
+  "max_action_ms": 1500,
+  "combat_enabled": false,
+  "chat_enabled": true,
+  "voluntary_chat_enabled": true,
+  "min_seconds_between_messages": 4,
+  "maximum_message_length": 127,
+  "respond_when_directly_addressed": true,
+  "respond_to_group_conversation": true,
+  "trusted_players_only_for_gameplay_requests": true,
+  "conversation_retention_days": 7,
+  "conversation_buffer_size": 40,
+  "max_turns_per_run": 300,
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low"
+}

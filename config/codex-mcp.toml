@@ -1,0 +1,8 @@
+# Generated entry format verified against installed Codex CLI 0.155.0-alpha.9.2.
+# scripts/install-local.py registers this using `codex mcp add`, preserving other entries.
+[mcp_servers.valheim-codex]
+command = "/absolute/path/to/checkout/scripts/mcp.sh"
+args = []
+
+# stdio carries MCP; its child service listens exclusively on 127.0.0.1:8732.
+# Credentials are read from private files by the wrapper, never embedded in TOML.

@@ -1,0 +1,12 @@
+{
+  "assembly_valheim.dll": "9e55b055e64832dbb021d349f9fb41ecae5e5262735a6a6de679e3a9cbedebc9",
+  "assembly_utils.dll": "df653c4acd1ed1249c32cb2755e09505494cf095bcdaec802fcc57d7e74dc8a0",
+  "Splatform.dll": "605fbfee1fe6cb93de6ddfc256ed3583aa71c815e9cde58cdb21fa85ed978a87",
+  "UnityEngine.CoreModule.dll": "b4ff1589827d3d3fcb101338d15cf5da64a1fcc67859971596b3cfda5d33ded9",
+  "UnityEngine.ScreenCaptureModule.dll": "8b64cb3dd401dc6a74221ccde0a368e12bc618202be0a2037042d0867a8505ec",
+  "Unity.TextMeshPro.dll": "09fed15df91174a0bf0815979eaa093efbb7deb7b1c81203d68d3364b3e6fe56",
+  "assembly_guiutils.dll": "4f5ce909fc09d8c176e44f76883bc602e7c8a87df2da4e051dfce2b125701486",
+  "gui_framework.dll": "14ded1728315aba9e0b79eead596162228c497b0ee60b3eef5eb7ded58717650",
+  "UnityEngine.ImageConversionModule.dll": "8cd3dcf80b8d2cb759f12c814979ec43900bf9ac2cef1b999143164487d8d5bd",
+  "UnityEngine.UI.dll": "cf5495db76b329ed3b13aedf79dbe2e69c064643e054571d9562122acae14d8a"
+}

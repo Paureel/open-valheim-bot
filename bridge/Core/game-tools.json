@@ -1,0 +1,642 @@
+[
+  {
+    "name": "health",
+    "description": "Bridge capability and watchdog status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "observe_player_view",
+    "description": "See the local character camera. No arbitrary viewpoints.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_status",
+    "description": "Limited own-player HUD state.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_chat",
+    "description": "Delivered client chat only. Cursor resets when session_id changes.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "after_event_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "look",
+    "description": "Turn view relative to current view.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "delta_yaw": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "delta_pitch": {
+          "type": "number",
+          "minimum": -80,
+          "maximum": 80
+        }
+      },
+      "required": [
+        "delta_yaw",
+        "delta_pitch"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "move",
+    "description": "Short input lease through normal local-player controls.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "forward": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
+        },
+        "strafe": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1500
+        },
+        "sprint": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "forward",
+        "strafe",
+        "duration_ms"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "block",
+    "description": "Hold normal block for a short lease.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1500
+        }
+      },
+      "required": [
+        "duration_ms"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "use_hotbar",
+    "description": "Use a normal hotbar slot.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        }
+      },
+      "required": [
+        "slot"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "send_chat",
+    "description": "Send real character chat. Subject to cooldown and duplicate filtering.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "shout"
+          ]
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "jump",
+    "description": "Press jump once.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "crouch",
+    "description": "Toggle crouch through normal input.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "interact",
+    "description": "Press interact at the current view target.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "primary_attack",
+    "description": "Press primary attack once. Combat gate must be enabled.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "secondary_attack",
+    "description": "Press secondary attack once. Combat gate must be enabled.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "stop",
+    "description": "Emergency stop: release all controls and latch pause until local resume.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_inventory",
+    "description": "Inspect only the bridge-opened own inventory, known recipes, requirements and craft results.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "open_inventory",
+    "description": "Open your normal player inventory and Craft tab; movement is released.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "close_inventory",
+    "description": "Close your inventory, cancelling any unfinished craft.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "inventory_move",
+    "description": "Move, swap, merge or split a stack within your own grid through normal UI selection. Coordinates are zero based; row 0 is the hotbar. Use the latest item IDs; expected_destination_id is empty for an empty cell.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "to_x": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "to_y": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 999
+        },
+        "expected_destination_id": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "item_id",
+        "to_x",
+        "to_y",
+        "amount",
+        "expected_destination_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "inventory_use",
+    "description": "Normal right-click use/equip/eat on an observed own item. Verify equipment/food in the next status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "item_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "item_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "select_recipe",
+    "description": "Select a recipe_id from the current known Craft list; never discovers unknown recipes.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "recipe_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "recipe_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "craft_selected",
+    "description": "Start one normal timed craft of the selected recipe. Requires real materials, station and space. Check last_craft in a later status.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "recipe_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "recipe_id"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "cancel_crafting",
+    "description": "Cancel the current normal craft without consuming its materials.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "aim_at",
+    "description": "Aim the normal camera at a point in the current image. x and y are fractions of image width and height; origin top left. Target the pickup/trunk itself. Does not move or interact.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ground": {
+          "type": "boolean",
+          "default": false,
+          "description": "For nearby ground pickups/sapling bases, compensate for the third-person camera using a flat-ground estimate. No hidden target query."
+        },
+        "frame_id": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "open_map",
+    "description": "Open the normal explored player map for visual inspection. No hidden terrain or pin coordinates are exposed.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "close_map",
+    "description": "Close the bridge-opened map before normal gameplay.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "map_zoom",
+    "description": "Zoom the ordinary player map. Positive steps zoom in; negative zoom out.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "type": "integer",
+          "minimum": -3,
+          "maximum": 3
+        }
+      },
+      "required": [
+        "steps"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "stride",
+    "description": "Travel continuously along a visible clear corridor. Heading is degrees right of the captured camera, distance is meters from your body in that exact image. Stops at the selected end, hazard, obstruction or ten seconds.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "heading": {
+          "type": "number",
+          "minimum": -80,
+          "maximum": 80
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 2,
+          "maximum": 20
+        },
+        "frame_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "sprint": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "heading",
+        "distance",
+        "frame_id",
+        "sprint"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "travel_to",
+    "description": "Walk purposefully toward visible ground selected in view.frame_id while planning. Stops within 1.2m, on obstruction, damage, water, lost heartbeat or at budget. Flat-ground estimate; choose clear nearby ground, max20m. No hidden navigation.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "frame_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "budget_ms": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 10000
+        },
+        "sprint": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "frame_id",
+        "budget_ms",
+        "sprint"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "halt",
+    "description": "Deliberately stop movement without latching emergency pause. Use to rest, inspect, wait or change plans.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "approach_interact",
+    "description": "Approach the base of one nearby visible target, aim locally and interact once only when its normal crosshair caption matches expected_name. Maximum 10m and 8 seconds, renewable short leases. Uses image frame_id, no hidden target search. Stops on obstacles, damage, mismatch or expiry.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "frame_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        },
+        "expected_name": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "frame_id",
+        "expected_name"
+      ],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "motor",
+    "description": "Continuous local desired controls. Requires fresh image (<=900ms); same controls renew atomically without a release gap. Only the local System 1 controller uses this.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "forward": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
+        },
+        "strafe": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
+        },
+        "yaw_rate": {
+          "type": "number",
+          "minimum": -120,
+          "maximum": 120
+        },
+        "pitch_rate": {
+          "type": "number",
+          "minimum": -60,
+          "maximum": 60
+        },
+        "sprint": {
+          "type": "boolean"
+        },
+        "block": {
+          "type": "boolean"
+        },
+        "button": {
+          "type": "string",
+          "enum": [
+            "none",
+            "jump",
+            "primary_attack",
+            "interact"
+          ]
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 900
+        },
+        "frame_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483647
+        }
+      },
+      "required": [
+        "forward",
+        "strafe",
+        "yaw_rate",
+        "pitch_rate",
+        "sprint",
+        "block",
+        "button",
+        "duration_ms",
+        "frame_id"
+      ],
+      "additionalProperties": false
+    }
+  }
+]

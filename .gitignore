@@ -1,0 +1,16 @@
+.tools/
+.runtime/
+.test-runtime/
+build/
+**/bin/
+**/obj/
+__pycache__/
+*.pyc
+*.sqlite3*
+*.token
+config/local.json
+docs/inspection.local.json
+docs/api-inspection.local.json
+.DS_Store
+recordings/
+.dist/
